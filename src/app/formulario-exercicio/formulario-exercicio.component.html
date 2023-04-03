@@ -1,0 +1,28 @@
+<section class="formulario">
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
+        <div class="mb-3">
+            <label for="peso" class="form-label">Peso - kg</label>
+            <input min="1" max="500" value="50" step="1" formControlName="peso" type="number" class="form-control" id="peso">
+            <div style="color: red;" *ngIf="form.get('peso').invalid && (form.get('peso').dirty || form.get('peso').touched)">
+                <div *ngIf="form.get('peso').errors['required']">*Peso é obrigatório*|</div>
+                <div *ngIf="form.get('peso').errors['min']">Peso mínimo é 1</div>
+                <div *ngIf="form.get('peso').errors['max']">Peso máximo é 500</div>
+            </div>               
+        </div>
+        <div class="mb-3">
+            <label for="altura" class="form-label">Altura - cm</label>
+            <input min="0.01" max="3" value="1" step="0.1" formControlName="altura" type="number" class="form-control" id="altura">
+            <div style="color: red;" *ngIf="form.get('altura').invalid && (form.get('altura').dirty || form.get('altura').touched)">
+                <div *ngIf="form.get('altura').errors['required']">*Altura é obrigatória*</div>
+                <div *ngIf="form.get('altura').errors['min']">Altura mínima é 0.01</div>
+                <div *ngIf="form.get('altura').errors['max']">Altura máxima é 3</div>
+              </div>   
+        </div>
+        <button [disabled]="!form.valid" type="submit" class="btn btn-primary">Calcular</button>
+    </form>
+    <span *ngIf="resultado != undefined">
+      Seu IMC é {{resultado}} - Classificação: {{classificacao}}
+    </span>
+    <img src="https://endocrinologiacuritiba.com.br/wp-content/uploads/2012/02/tabela_imc.jpg" alt="">
+  </section>
+  
